@@ -1,0 +1,64 @@
+{
+  "name": "babel-plugin-inline-classnames",
+  "version": "1.0.0",
+  "description": "Babel plugin which inlines the result of classnames",
+  "keywords": [
+    "babel-plugin",
+    "classnames",
+    "inline",
+    "css",
+    "css-modules",
+    "style",
+    "styles"
+  ],
+  "homepage": "https://github.com/avaly/babel-plugin-inline-classnames",
+  "bugs": {
+    "url": "https://github.com/avaly/babel-plugin-inline-classnames/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Valentin Agachi",
+    "url": "http://agachi.name/"
+  },
+  "files": ["index.js"],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avaly/babel-plugin-inline-classnames.git"
+  },
+  "scripts": {
+    "commitmsg": "validate-commit-msg",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "pretty": "prettier --use-tabs --single-quote --trailing-comma all --write \"**/*.js\"",
+    "test": "jest --config jest.json",
+    "version": "standard-version"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "classnames": "^2.2.5",
+    "eslint": "^4.1.1",
+    "eslint-config-prettier": "^2.3.0",
+    "husky": "^0.14.2",
+    "jest": "^20.0.4",
+    "lint-staged": "^4.0.0",
+    "prettier": "^1.5.2",
+    "standard-version": "^4.2.0",
+    "validate-commit-msg": "^2.12.2"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "eslint",
+      "husky",
+      "lint-staged",
+      "standard-version",
+      "validate-commit-msg"
+    ]
+  }
+}
