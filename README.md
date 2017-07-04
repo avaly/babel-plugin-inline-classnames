@@ -4,6 +4,8 @@
 
 Babel plugin which inlines the result of [classnames](https://github.com/JedWatson/classnames)
 
+Useful for production builds.
+
 ## Install
 
 npm:
@@ -22,9 +24,23 @@ yarn add babel-plugin-inline-classnames
 
 Add this plugin to your Babel config. Most commonly used in [`.babelrc`](http://babeljs.io/docs/usage/babelrc/):
 
+For all environments:
+
 ```json
 {
-	"plugins": ["inline-classnames"]
+  "plugins": ["inline-classnames"]
+}
+```
+
+For production only (see [env](http://babeljs.io/docs/usage/babelrc/#env-option) option):
+
+```json
+{
+  "env": {
+    "production": {
+      "plugins": ["inline-classnames"]
+    }
+  }
 }
 ```
 
@@ -44,7 +60,7 @@ classNames({ foo: true }, { bar: true });
 classNames({ foo: true, bar: true });
 classNames('foo', { bar: true, duck: false }, 'baz', { quux: true });
 classNames(null, false, 'bar', undefined, 0, 1, { baz: null }, '');
-classnames(styles.foo, styles.bar);
+classNames(styles.foo, styles.bar);
 ```
 
 Output:
