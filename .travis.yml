@@ -9,3 +9,9 @@ cache:
 script:
   - yarn run lint
   - yarn test
+
+deploy:
+  - provider: script
+    script: tools/publish.sh
+    on:
+      tags: true
