@@ -51,8 +51,22 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		const left = transformer(nodes[index]);
 		const right = joiner(nodes.splice(index + 1));
 
-		if (left.type === 'StringLiteral') {
-			return createPlus(t.stringLiteral(left.value + ' '), right);
+		if (!isValidNode(left)) {
+			return right;
+		}
+		if (!isValidNode(right)) {
+			return left;
+		}
+
+		if (t.isStringLiteral(left)) {
+			if (t.isStringLiteral(right)) {
+				const value = left.value + ' ' + right.value;
+				return t.stringLiteral(value.trim());
+			} else {
+				return createPlus(t.stringLiteral(left.value + ' '), right);
+			}
+		} else if (t.isStringLiteral(right)) {
+			return createPlus(left, t.stringLiteral(' ' + right.value));
 		}
 
 		return createPlus(createPlus(left, t.stringLiteral(' ')), right);

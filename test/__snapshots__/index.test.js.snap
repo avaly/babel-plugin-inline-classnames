@@ -12,14 +12,14 @@ styles.foo + ' ' + styles.bar;
 exports[`classnames-examples 1`] = `
 "
 
-'foo ' + 'bar';
-'foo ' + 'bar';
+'foo bar';
+'foo bar';
 'foo-bar';
 '';
-'foo ' + 'bar';
-'foo ' + 'bar';
-'foo ' + ('bar ' + '' + ' ' + ('baz ' + 'quux'));
-'bar ' + (1 + ' ' + (' ' + ''));"
+'foo bar';
+'foo bar';
+'foo bar baz quux';
+'bar ' + 1;"
 `;
 
 exports[`custom-import-name 1`] = `
@@ -42,11 +42,11 @@ exports[`object-expression 1`] = `
 "
 import styles from './styles.css';
 
-'foo ' + 'bar';
+'foo bar';
 'foo-bar';
-'foo ' + 'bar';
-'foo ' + 'bar';
-'foo ' + '';
+'foo bar';
+'foo bar';
+'foo ham';
 styles.foo + ' ' + styles.bar;"
 `;
 
@@ -65,6 +65,5 @@ exports[`string-literal 1`] = `
 import styles from './styles.css';
 
 'global ' + (styles.foo + ' ' + styles.bar);
-
-<div className={styles.foo + ' ' + ('global ' + styles.bar)} />;"
+'foo bar ham';"
 `;
