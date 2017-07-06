@@ -68,13 +68,13 @@ Output:
 ```js
 import styles from './styles.css';
 
-'foo ' + 'bar';
-'foo ' + 'bar';
+'foo bar';
+'foo bar';
 'foo-bar';
 '';
-'foo ' + 'bar';
-'foo ' + 'bar';
-'foo ' + ('bar ' + '' + ' ' + ('baz ' + 'quux'));
-'bar ' + (1 + ' ' + (' ' + ''));
+'foo bar';
+'foo bar';
+'foo bar baz quux';
+'bar ' + 1;
 styles.foo + ' ' + styles.bar;
 ```
