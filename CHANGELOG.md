@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.1.5...v1.1.6) (2017-07-11)
+
+
+### Bug Fixes
+
+* Fallback value for logical and conditional expressions :bug: ([622e919](https://github.com/avaly/babel-plugin-inline-classnames/commit/622e919))
+
+
+
 <a name="1.1.5"></a>
 ## [1.1.5](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.1.4...v1.1.5) (2017-07-11)
 
