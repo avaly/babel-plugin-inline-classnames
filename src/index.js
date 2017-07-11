@@ -44,7 +44,12 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 	}
 
 	function wrapIdentifier(node) {
-		if (t.isIdentifier(node) || t.isMemberExpression(node)) {
+		if (
+			t.isIdentifier(node) ||
+			t.isMemberExpression(node) ||
+			t.isLogicalExpression(node) ||
+			t.isConditionalExpression(node)
+		) {
 			return t.logicalExpression('||', node, t.stringLiteral(''));
 		}
 		return node;

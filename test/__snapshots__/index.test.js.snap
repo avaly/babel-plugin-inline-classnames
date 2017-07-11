@@ -36,6 +36,16 @@ const nullValue = null;
 'foo ' + (1 + ' ' + (nullValue || ''));"
 `;
 
+exports[`logical-expressions 1`] = `
+"
+
+const TRUTHY = true;
+const FALSY = false;
+const nullValue = null;
+
+(TRUTHY && nullValue || '') + ' ' + ((FALSY && 'foo' || '') + ' ' + ((TRUTHY ? nullValue : 'ham') || ''));"
+`;
+
 exports[`object-expression 1`] = `
 "
 import styles from './styles.css';

@@ -15,6 +15,7 @@ const plugin = __dirname + '/../src/index.js';
 	'falsy-values',
 	'classnames-examples',
 	'scoped',
+	'logical-expressions',
 ].forEach(test => {
 	it(test, () => {
 		const source = fs.readFileSync(__dirname + '/fixtures/' + test + '.js');
