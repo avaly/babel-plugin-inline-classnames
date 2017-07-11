@@ -76,5 +76,5 @@ import styles from './styles.css';
 'foo bar';
 'foo bar baz quux';
 'bar ' + 1;
-styles.foo + ' ' + styles.bar;
+(styles.foo || '') + ' ' + (styles.bar || '');
 ```

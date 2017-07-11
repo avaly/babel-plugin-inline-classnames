@@ -4,9 +4,7 @@ exports[`basic 1`] = `
 "
 import styles from './styles.css';
 
-styles.foo + ' ' + styles.bar;
-
-<div className={styles.foo + ' ' + styles.bar} />;"
+(styles.foo || '') + ' ' + (styles.bar || '');"
 `;
 
 exports[`classnames-examples 1`] = `
@@ -24,18 +22,18 @@ exports[`classnames-examples 1`] = `
 
 exports[`custom-import-name 1`] = `
 "
-import styles from '../styles.css';
+import styles from './styles.css';
 
-styles.foo + ' ' + styles.bar;
-
-<div className={styles.foo + ' ' + styles.bar} />;"
+(styles.foo || '') + ' ' + (styles.bar || '');"
 `;
 
 exports[`falsy-values 1`] = `
 "
 
+const nullValue = null;
+
 '';
-'foo ' + 1;"
+'foo ' + (1 + ' ' + (nullValue || ''));"
 `;
 
 exports[`object-expression 1`] = `
@@ -47,7 +45,7 @@ import styles from './styles.css';
 'foo bar';
 'foo bar';
 'foo ham';
-styles.foo + ' ' + styles.bar;"
+(styles.foo || '') + ' ' + (styles.bar || '');"
 `;
 
 exports[`other-classnames 1`] = `
@@ -55,9 +53,7 @@ exports[`other-classnames 1`] = `
 
 function classnames() {}
 
-classnames(styles.foo, styles.bar);
-
-<div className={classnames(styles.foo, styles.bar)} />;"
+classnames(styles.foo, styles.bar);"
 `;
 
 exports[`scoped 1`] = `
@@ -74,6 +70,6 @@ exports[`string-literal 1`] = `
 "
 import styles from './styles.css';
 
-'global ' + (styles.foo + ' ' + styles.bar);
+'global ' + ((styles.foo || '') + ' ' + (styles.bar || ''));
 'foo bar ham';"
 `;

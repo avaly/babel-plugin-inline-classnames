@@ -4,9 +4,7 @@
 const babel = require('babel-core');
 const fs = require('fs');
 
-const babelOptions = {
-	plugins: ['syntax-jsx', __dirname + '/../src/index.js'],
-};
+const plugin = __dirname + '/../src/index.js';
 
 [
 	'basic',
@@ -20,7 +18,7 @@ const babelOptions = {
 ].forEach(test => {
 	it(test, () => {
 		const source = fs.readFileSync(__dirname + '/fixtures/' + test + '.js');
-		const { code } = babel.transform(source, babelOptions);
+		const { code } = babel.transform(source, { plugins: [plugin] });
 
 		expect(code).toMatchSnapshot();
 	});

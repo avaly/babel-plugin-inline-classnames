@@ -43,6 +43,13 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		return t.binaryExpression('+', left, right);
 	}
 
+	function wrapIdentifier(node) {
+		if (t.isIdentifier(node) || t.isMemberExpression(node)) {
+			return t.logicalExpression('||', node, t.stringLiteral(''));
+		}
+		return node;
+	}
+
 	function joinNodes(nodes, index, transformer, joiner) {
 		if (index >= nodes.length) {
 			return null;
@@ -72,7 +79,10 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 			return createPlus(left, t.stringLiteral(' ' + right.value));
 		}
 
-		return createPlus(createPlus(left, t.stringLiteral(' ')), right);
+		return createPlus(
+			createPlus(wrapIdentifier(left), t.stringLiteral(' ')),
+			wrapIdentifier(right),
+		);
 	}
 
 	function transformProperty(property) {
