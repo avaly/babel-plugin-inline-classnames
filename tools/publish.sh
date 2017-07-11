@@ -16,6 +16,7 @@ if [[ -z $TAG ]]; then
 	echo "No tag found. Skipping publish."
 else
 	echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+	npm run build
 	npm publish
 	rm ~/.npmrc
 fi

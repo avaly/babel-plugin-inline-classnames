@@ -5,7 +5,7 @@ const babel = require('babel-core');
 const fs = require('fs');
 
 const babelOptions = {
-	plugins: ['syntax-jsx', __dirname + '/../index.js'],
+	plugins: ['syntax-jsx', __dirname + '/../src/index.js'],
 };
 
 [
