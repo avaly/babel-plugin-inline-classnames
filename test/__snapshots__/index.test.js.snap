@@ -60,6 +60,16 @@ classnames(styles.foo, styles.bar);
 <div className={classnames(styles.foo, styles.bar)} />;"
 `;
 
+exports[`scoped 1`] = `
+"
+
+function scope1() {
+	function scope2() {
+		return 'foo bar';
+	}
+}"
+`;
+
 exports[`string-literal 1`] = `
 "
 import styles from './styles.css';

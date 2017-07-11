@@ -16,6 +16,7 @@ const babelOptions = {
 	'object-expression',
 	'falsy-values',
 	'classnames-examples',
+	'scoped',
 ].forEach(test => {
 	it(test, () => {
 		const source = fs.readFileSync(__dirname + '/fixtures/' + test + '.js');

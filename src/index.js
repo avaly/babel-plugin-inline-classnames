@@ -1,10 +1,13 @@
 const BabelPluginInlineClassnames = ({ types: t }) => {
-	function isCalleeClassnames(name, bindings) {
-		if (!bindings[name]) {
+	function isCalleeClassnames(name, scope) {
+		if (!scope) {
 			return false;
 		}
+		if (!scope.bindings[name]) {
+			return isCalleeClassnames(name, scope.parent);
+		}
 
-		const binding = bindings[name];
+		const binding = scope.bindings[name];
 		if (binding.kind !== 'module') {
 			return false;
 		}
@@ -122,7 +125,7 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		CallExpression(path) {
 			const { node } = path;
 
-			if (!isCalleeClassnames(node.callee.name, path.scope.bindings)) {
+			if (!isCalleeClassnames(node.callee.name, path.scope)) {
 				return;
 			}
 
