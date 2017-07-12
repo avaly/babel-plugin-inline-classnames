@@ -1,13 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`basic 1`] = `
+exports[`executes basic.js 1`] = `"FOO BAR"`;
+
+exports[`executes classnames-examples.js 1`] = `"bar 1"`;
+
+exports[`executes custom-import-name.js 1`] = `"FOO BAR"`;
+
+exports[`executes falsy-values-mixed.js 1`] = `"foo 1 "`;
+
+exports[`executes falsy-values-only.js 1`] = `""`;
+
+exports[`executes logical-expressions.js 1`] = `"  "`;
+
+exports[`executes object-expression.js 1`] = `"FOO BAR"`;
+
+exports[`executes other-classnames.js 1`] = `undefined`;
+
+exports[`executes scoped.js 1`] = `"foo bar"`;
+
+exports[`executes string-literal-mixed.js 1`] = `"global FOO BAR"`;
+
+exports[`executes string-literals-only.js 1`] = `"foo bar ham"`;
+
+exports[`transforms basic.js 1`] = `
 "
 import styles from './styles.css';
 
 (styles.foo || '') + ' ' + (styles.bar || '');"
 `;
 
-exports[`classnames-examples 1`] = `
+exports[`transforms classnames-examples.js 1`] = `
 "
 
 'foo bar';
@@ -20,23 +42,28 @@ exports[`classnames-examples 1`] = `
 'bar ' + 1;"
 `;
 
-exports[`custom-import-name 1`] = `
+exports[`transforms custom-import-name.js 1`] = `
 "
 import styles from './styles.css';
 
 (styles.foo || '') + ' ' + (styles.bar || '');"
 `;
 
-exports[`falsy-values 1`] = `
+exports[`transforms falsy-values-mixed.js 1`] = `
 "
 
 const nullValue = null;
 
-'';
 'foo ' + (1 + ' ' + (nullValue || ''));"
 `;
 
-exports[`logical-expressions 1`] = `
+exports[`transforms falsy-values-only.js 1`] = `
+"
+
+'';"
+`;
+
+exports[`transforms logical-expressions.js 1`] = `
 "
 
 const TRUTHY = true;
@@ -46,7 +73,7 @@ const nullValue = null;
 (TRUTHY && nullValue || '') + ' ' + ((FALSY && 'foo' || '') + ' ' + ((TRUTHY ? nullValue : 'ham') || ''));"
 `;
 
-exports[`object-expression 1`] = `
+exports[`transforms object-expression.js 1`] = `
 "
 import styles from './styles.css';
 
@@ -58,7 +85,7 @@ import styles from './styles.css';
 (styles.foo || '') + ' ' + (styles.bar || '');"
 `;
 
-exports[`other-classnames 1`] = `
+exports[`transforms other-classnames.js 1`] = `
 "import styles from './styles.css';
 
 function classnames() {}
@@ -66,20 +93,30 @@ function classnames() {}
 classnames(styles.foo, styles.bar);"
 `;
 
-exports[`scoped 1`] = `
+exports[`transforms scoped.js 1`] = `
 "
 
 function scope1() {
 	function scope2() {
 		return 'foo bar';
 	}
-}"
+
+	return scope2();
+}
+
+scope1();"
 `;
 
-exports[`string-literal 1`] = `
+exports[`transforms string-literal-mixed.js 1`] = `
 "
 import styles from './styles.css';
 
-'global ' + ((styles.foo || '') + ' ' + (styles.bar || ''));
+'global ' + ((styles.foo || '') + ' ' + (styles.bar || ''));"
+`;
+
+exports[`transforms string-literals-only.js 1`] = `
+"
+import styles from './styles.css';
+
 'foo bar ham';"
 `;
