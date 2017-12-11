@@ -34,8 +34,8 @@
     "lint": "eslint .",
     "precommit": "lint-staged",
     "pretty": "prettier --use-tabs --single-quote --trailing-comma all --write \"**/*.js\"",
-    "test": "jest --config jest.json",
-    "version": "standard-version"
+    "release": "standard-version",
+    "test": "jest --config jest.json"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

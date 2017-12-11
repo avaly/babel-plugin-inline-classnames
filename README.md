@@ -1,6 +1,7 @@
 # babel-plugin-inline-classnames
 
 [![Travis branch](https://img.shields.io/travis/avaly/babel-plugin-inline-classnames/master.svg?style=flat-square)](https://travis-ci.org/avaly/babel-plugin-inline-classnames)
+[![NPM version](https://img.shields.io/npm/v/babel-plugin-inline-classnames.svg?style=flat-square)](https://www.npmjs.com/package/babel-plugin-inline-classnames)
 
 Babel plugin which inlines the result of [classnames](https://github.com/JedWatson/classnames)
 
