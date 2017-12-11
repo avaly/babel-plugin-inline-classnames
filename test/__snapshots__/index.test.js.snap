@@ -10,6 +10,8 @@ exports[`executes falsy-values-mixed.js 1`] = `"foo 1 "`;
 
 exports[`executes falsy-values-only.js 1`] = `""`;
 
+exports[`executes logical-expression.js 1`] = `""`;
+
 exports[`executes logical-expressions.js 1`] = `"  "`;
 
 exports[`executes object-expression.js 1`] = `"FOO BAR"`;
@@ -61,6 +63,15 @@ exports[`transforms falsy-values-only.js 1`] = `
 "
 
 '';"
+`;
+
+exports[`transforms logical-expression.js 1`] = `
+"
+
+const FALSY = false;
+const ANOTHER_FALSY = false;
+
+FALSY && ANOTHER_FALSY && 'foo' || '';"
 `;
 
 exports[`transforms logical-expressions.js 1`] = `
