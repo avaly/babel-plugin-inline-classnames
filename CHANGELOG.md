@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.1.7...v1.1.8) (2017-12-11)
+
+
+### Bug Fixes
+
+* Skip cleanup in Travis on deploy :bug: ([ac217a5](https://github.com/avaly/babel-plugin-inline-classnames/commit/ac217a5))
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.1.6...v1.1.7) (2017-12-11)
 
