@@ -24,7 +24,7 @@ fixtures.forEach(fixture => {
 	it(`executes ${test}`, () => {
 		const source = fs.readFileSync(__dirname + '/fixtures/' + test);
 		const { code } = babel.transform(source, {
-			plugins: ['transform-es2015-modules-commonjs', plugin],
+			plugins: ['@babel/plugin-transform-modules-commonjs', plugin],
 		});
 
 		const result = eval(code);

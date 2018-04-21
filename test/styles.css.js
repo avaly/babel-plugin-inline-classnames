@@ -1,6 +1,4 @@
-const styles = {
+module.exports = {
 	foo: 'FOO',
 	bar: 'BAR',
 };
-
-export default styles;

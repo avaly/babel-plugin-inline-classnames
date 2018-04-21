@@ -1,3 +1,15 @@
+const removeClassnamesImport = {
+	ImportDeclaration(path) {
+		const { source } = path.node;
+
+		if (source.type !== 'StringLiteral' || source.value !== 'classnames') {
+			return;
+		}
+
+		path.remove();
+	},
+};
+
 const BabelPluginInlineClassnames = ({ types: t }) => {
 	function isCalleeClassnames(name, scope) {
 		if (!scope) {
@@ -143,34 +155,28 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		return joinNodes(args, index, transformArgument, joinArguments);
 	}
 
-	const visitor = {
-		CallExpression(path) {
-			const { node } = path;
-
-			if (!isCalleeClassnames(node.callee.name, path.scope)) {
-				return;
-			}
-
-			const replacement = joinArguments(node.arguments);
-
-			path.replaceWith(replacement);
-		},
-
-		ImportDeclaration(path) {
-			const { source } = path.node;
-
-			if (source.type !== 'StringLiteral' || source.value !== 'classnames') {
-				return;
-			}
-
-			path.remove();
-		},
-	};
-
 	return {
 		name: 'babel-plugin-inline-classnames',
-		visitor,
+		visitor: {
+			Program: {
+				exit(path, state) {
+					path.traverse(removeClassnamesImport, state);
+				},
+			},
+
+			CallExpression(path) {
+				const { node } = path;
+
+				if (!isCalleeClassnames(node.callee.name, path.scope)) {
+					return;
+				}
+
+				const replacement = joinArguments(node.arguments);
+
+				path.replaceWith(replacement);
+			},
+		},
 	};
 };
 
-export default BabelPluginInlineClassnames;
+module.exports = BabelPluginInlineClassnames;
