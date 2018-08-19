@@ -1,7 +1,7 @@
 language: node_js
 node_js:
+  - '10'
   - '8'
-  - '6'
 
 cache:
   yarn: true
@@ -9,10 +9,3 @@ cache:
 script:
   - yarn run lint
   - yarn test
-
-deploy:
-  - provider: script
-    script: tools/publish.sh
-    skip_cleanup: true
-    on:
-      tags: true

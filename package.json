@@ -56,14 +56,5 @@
   },
   "engines": {
     "node": ">=6"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "eslint",
-      "husky",
-      "lint-staged",
-      "standard-version",
-      "validate-commit-msg"
-    ]
   }
 }
