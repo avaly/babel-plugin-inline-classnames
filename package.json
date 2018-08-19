@@ -54,6 +54,9 @@
     "standard-version": "^4.4.0",
     "validate-commit-msg": "^2.14.0"
   },
+  "peerDependencies": {
+    "babel-core": "6.*"
+  },
   "engines": {
     "node": ">=6"
   }
