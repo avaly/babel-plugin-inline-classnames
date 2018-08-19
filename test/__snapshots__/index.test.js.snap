@@ -2,6 +2,12 @@
 
 exports[`executes basic.js 1`] = `"FOO BAR"`;
 
+exports[`executes bind.js 1`] = `"FOO BAR"`;
+
+exports[`executes bind-example.js 1`] = `"abc def xyz"`;
+
+exports[`executes bind-scoped.js 1`] = `"FOO BAR"`;
+
 exports[`executes classnames-examples.js 1`] = `"bar 1"`;
 
 exports[`executes custom-import-name.js 1`] = `"FOO BAR"`;
@@ -29,6 +35,40 @@ exports[`transforms basic.js 1`] = `
 import styles from './styles.css';
 
 (styles.foo || '') + ' ' + (styles.bar || '');"
+`;
+
+exports[`transforms bind.js 1`] = `
+"
+import styles from './styles.css';
+
+(styles.foo || '') + ' ' + (styles.bar || '');"
+`;
+
+exports[`transforms bind-example.js 1`] = `
+"
+
+const inline = {
+	foo: 'abc',
+	bar: 'def',
+	baz: 'xyz'
+};
+
+(inline.foo || '') + ' ' + ((inline.bar || '') + ' ' + ((1 ? inline.baz : '') || ''));"
+`;
+
+exports[`transforms bind-scoped.js 1`] = `
+"
+import styles from './styles.css';
+
+function scope1() {
+	function scope2() {
+		return (styles.foo || '') + ' ' + (styles.bar || '');
+	}
+
+	return scope2();
+}
+
+scope1();"
 `;
 
 exports[`transforms classnames-examples.js 1`] = `
