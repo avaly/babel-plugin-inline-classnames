@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-inline-classnames",
-  "version": "1.1.8",
+  "version": "1.2.0",
   "description": "Babel plugin which inlines the result of classnames",
   "keywords": [
     "babel-plugin",
@@ -35,7 +35,7 @@
     "precommit": "lint-staged",
     "pretty": "prettier --use-tabs --single-quote --trailing-comma all --write \"**/*.js\"",
     "release": "standard-version",
-    "test": "jest --config jest.json"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-rc.3",
@@ -45,26 +45,20 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.2.6",
     "classnames": "^2.2.5",
-    "eslint": "^4.1.1",
-    "eslint-config-prettier": "^2.3.0",
+    "eslint": "^5.4.0",
+    "eslint-config-prettier": "^3.0.1",
     "glob": "^7.1.2",
-    "husky": "^0.14.2",
-    "jest": "^22.4.3",
-    "lint-staged": "^4.0.0",
-    "prettier": "^1.5.2",
-    "standard-version": "^4.2.0",
-    "validate-commit-msg": "^2.12.2"
+    "husky": "^0.14.3",
+    "jest": "^22.4.4",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2",
+    "standard-version": "^4.4.0",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "peerDependencies": {
+    "babel-core": "6.*"
   },
   "engines": {
     "node": ">=6"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "eslint",
-      "husky",
-      "lint-staged",
-      "standard-version",
-      "validate-commit-msg"
-    ]
   }
 }

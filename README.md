@@ -79,3 +79,22 @@ import styles from './styles.css';
 'bar ' + 1;
 (styles.foo || '') + ' ' + (styles.bar || '');
 ```
+
+With [`bind`](https://github.com/JedWatson/classnames#alternate-bind-version-for-css-modules):
+
+```js
+import classNames from 'classnames/bind';
+import styles from './styles.css';
+
+const cx = classNames.bind(styles);
+
+cx('foo', 'bar');
+```
+
+Output:
+
+```js
+import styles from './styles.css';
+
+(styles.foo || '') + ' ' + (styles.bar || '');
+```

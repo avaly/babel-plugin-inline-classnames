@@ -1,8 +1,15 @@
+const CLASSNAMES_IMPORT = 'classnames';
+const CLASSNAMES_BIND_IMPORT = 'classnames/bind';
+
 const removeClassnamesImport = {
 	ImportDeclaration(path) {
 		const { source } = path.node;
+		const { type, value } = source;
 
-		if (source.type !== 'StringLiteral' || source.value !== 'classnames') {
+		if (
+			type !== 'StringLiteral' ||
+			(value !== CLASSNAMES_IMPORT && value !== CLASSNAMES_BIND_IMPORT)
+		) {
 			return;
 		}
 
@@ -10,30 +17,51 @@ const removeClassnamesImport = {
 	},
 };
 
-const BabelPluginInlineClassnames = ({ types: t }) => {
-	function isCalleeClassnames(name, scope) {
-		if (!scope) {
-			return false;
-		}
-		if (!scope.bindings[name]) {
-			return isCalleeClassnames(name, scope.parent);
-		}
-
-		const binding = scope.bindings[name];
-		if (binding.kind !== 'module') {
-			return false;
-		}
-
-		const path = binding.path;
-		if (
-			path.parent.type !== 'ImportDeclaration' ||
-			path.parent.source.value !== 'classnames'
-		) {
-			return false;
-		}
-
-		return true;
+const isIdentifierDefinedAs = (name, importName, scope) => {
+	const binding = scope.bindings[name];
+	if (binding.kind !== 'module') {
+		return false;
 	}
+
+	const { path } = binding;
+	if (
+		path.parent.type !== 'ImportDeclaration' ||
+		path.parent.source.value !== importName
+	) {
+		return false;
+	}
+
+	return true;
+};
+
+const isCalleeClassnames = (name, scope) => {
+	if (!scope) {
+		return false;
+	}
+	if (!scope.bindings[name]) {
+		return isCalleeClassnames(name, scope.parent);
+	}
+
+	return isIdentifierDefinedAs(name, CLASSNAMES_IMPORT, scope);
+};
+
+const isCalleeClassnamesBind = (callee, scope) => {
+	if (callee.type !== 'MemberExpression' || !scope) {
+		return false;
+	}
+
+	const { name } = callee.object;
+
+	if (!scope.bindings[name]) {
+		return isCalleeClassnamesBind(callee, scope.parent);
+	}
+
+	return isIdentifierDefinedAs(name, CLASSNAMES_BIND_IMPORT, scope);
+};
+
+const BabelPluginInlineClassnames = ({ types: t }) => {
+	let boundName;
+	let boundSource;
 
 	function isValidNode(node) {
 		if (t.isNullLiteral(node) || t.isIdentifier(node, { name: 'undefined' })) {
@@ -71,16 +99,19 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		return node;
 	}
 
-	function joinNodes(nodes, index, transformer, joiner) {
+	const wrapBound = (value, bound) =>
+		t.memberExpression(t.identifier(bound), t.identifier(value));
+
+	function joinNodes(nodes, index, transformer, joiner, bound = null) {
 		if (index >= nodes.length) {
 			return null;
 		}
 		if (index === nodes.length - 1) {
-			return transformer(nodes[index], true);
+			return transformer(nodes[index], bound, true);
 		}
 
-		const left = transformer(nodes[index]);
-		const right = joiner(nodes.splice(index + 1));
+		const left = transformer(nodes[index], bound);
+		const right = joiner(nodes.splice(index + 1), bound);
 
 		if (!isValidNode(left)) {
 			return right;
@@ -106,11 +137,14 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		);
 	}
 
-	function transformProperty(property) {
+	function transformProperty(property, bound = null) {
 		let value = property.key;
 
 		if (t.isIdentifier(value)) {
 			value = t.stringLiteral(value.name);
+		}
+		if (bound) {
+			value = wrapBound(value.value, bound);
 		}
 
 		if (t.isBooleanLiteral(property.value)) {
@@ -130,21 +164,30 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 		return t.conditionalExpression(property.value, value, t.stringLiteral(''));
 	}
 
-	function joinObjectProperties(properties) {
-		return joinNodes(properties, 0, transformProperty, joinObjectProperties);
+	function joinObjectProperties(properties, bound = null) {
+		return joinNodes(
+			properties,
+			0,
+			transformProperty,
+			joinObjectProperties,
+			bound,
+		);
 	}
 
-	function transformArgument(node, allowWrap = false) {
+	function transformArgument(node, bound = null, allowWrap = false) {
 		if (t.isObjectExpression(node)) {
-			return joinObjectProperties(node.properties);
+			return joinObjectProperties(node.properties, bound);
 		}
 		if (allowWrap && isAndLogicalExpression(node)) {
 			return wrapIdentifier(node);
 		}
+		if (bound && t.isStringLiteral(node)) {
+			return wrapBound(node.value, bound);
+		}
 		return node;
 	}
 
-	function joinArguments(args) {
+	function joinArguments(args, bound = null) {
 		let index = 0;
 		const max = args.length - 1;
 
@@ -152,30 +195,64 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 			index++;
 		}
 
-		return joinNodes(args, index, transformArgument, joinArguments);
+		return joinNodes(args, index, transformArgument, joinArguments, bound);
 	}
 
-	return {
-		name: 'babel-plugin-inline-classnames',
-		visitor: {
-			Program: {
-				exit(path, state) {
-					path.traverse(removeClassnamesImport, state);
-				},
-			},
+	const visitor = {
+		CallExpression(path) {
+			const { node, scope } = path;
+			const { callee } = node;
 
-			CallExpression(path) {
-				const { node } = path;
-
-				if (!isCalleeClassnames(node.callee.name, path.scope)) {
-					return;
-				}
-
+			if (isCalleeClassnames(callee.name, scope)) {
 				const replacement = joinArguments(node.arguments);
 
 				path.replaceWith(replacement);
+			}
+
+			if (boundName && callee.name === boundName) {
+				const replacement = joinArguments(node.arguments, boundSource);
+
+				path.replaceWith(replacement);
+			}
+		},
+
+		Program: {
+			enter() {
+				boundName = null;
+				boundSource = null;
+			},
+			exit(path, state) {
+				path.traverse(removeClassnamesImport, state);
 			},
 		},
+
+		VariableDeclaration(path) {
+			const { node, scope } = path;
+
+			const found = node.declarations
+				.filter(
+					declaration =>
+						declaration.type === 'VariableDeclarator' &&
+						declaration.init.type === 'CallExpression',
+				)
+				.some(declaration => {
+					if (isCalleeClassnamesBind(declaration.init.callee, scope)) {
+						boundName = declaration.id.name;
+						boundSource = declaration.init.arguments[0].name;
+						return true;
+					}
+					return false;
+				});
+
+			if (found) {
+				path.remove();
+			}
+		},
+	};
+
+	return {
+		name: 'babel-plugin-inline-classnames',
+		visitor,
 	};
 };
 
