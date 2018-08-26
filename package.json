@@ -38,12 +38,12 @@
     "test": "jest --config jest.json"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.44",
-    "@babel/core": "^7.0.0-beta.44",
+    "@babel/cli": "^7.0.0-rc.3",
+    "@babel/core": "^7.0.0-rc.3",
+    "@babel/plugin-syntax-jsx": "^7.0.0-rc.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0-rc.3",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^7.2.3",
-    "@babel/plugin-syntax-jsx": "^7.0.0-beta.44",
-    "@babel/plugin-transform-modules-commonjs": "^7.0.0-beta.44",
+    "babel-eslint": "^8.2.6",
     "classnames": "^2.2.5",
     "eslint": "^4.1.1",
     "eslint-config-prettier": "^2.3.0",
