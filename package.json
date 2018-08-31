@@ -57,7 +57,7 @@
     "validate-commit-msg": "^2.14.0"
   },
   "peerDependencies": {
-    "babel-core": "6.* || ^7.0.0-bridge.0"
+    "@babel/core": "7.*"
   },
   "engines": {
     "node": ">=6"
