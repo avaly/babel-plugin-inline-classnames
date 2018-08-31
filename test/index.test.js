@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-console: 0 */
 
-const babel = require('babel-core');
+const babel = require('@babel/core');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
