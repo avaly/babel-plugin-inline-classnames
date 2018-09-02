@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.2.0...v2.0.0) (2018-09-02)
+
+
+### Features
+
+* Babel 7 support ([#3](https://github.com/avaly/babel-plugin-inline-classnames/issues/3)) ([5d2118a](https://github.com/avaly/babel-plugin-inline-classnames/commit/5d2118a))
+
+
+### BREAKING CHANGES
+
+* requires babel 7.* peer dependency
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.1.8...v1.2.0) (2018-08-19)
 
