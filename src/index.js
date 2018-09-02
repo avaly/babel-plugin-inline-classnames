@@ -1,6 +1,22 @@
 const CLASSNAMES_IMPORT = 'classnames';
 const CLASSNAMES_BIND_IMPORT = 'classnames/bind';
 
+const removeClassnamesImport = {
+	ImportDeclaration(path) {
+		const { source } = path.node;
+		const { type, value } = source;
+
+		if (
+			type !== 'StringLiteral' ||
+			(value !== CLASSNAMES_IMPORT && value !== CLASSNAMES_BIND_IMPORT)
+		) {
+			return;
+		}
+
+		path.remove();
+	},
+};
+
 const isIdentifierDefinedAs = (name, importName, scope) => {
 	const binding = scope.bindings[name];
 	if (binding.kind !== 'module') {
@@ -200,23 +216,14 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 			}
 		},
 
-		ImportDeclaration(path) {
-			const { source } = path.node;
-			const { type, value } = source;
-
-			if (
-				type !== 'StringLiteral' ||
-				(value !== CLASSNAMES_IMPORT && value !== CLASSNAMES_BIND_IMPORT)
-			) {
-				return;
-			}
-
-			path.remove();
-		},
-
-		Program() {
-			boundName = null;
-			boundSource = null;
+		Program: {
+			enter() {
+				boundName = null;
+				boundSource = null;
+			},
+			exit(path, state) {
+				path.traverse(removeClassnamesImport, state);
+			},
 		},
 
 		VariableDeclaration(path) {
@@ -249,4 +256,4 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 	};
 };
 
-export default BabelPluginInlineClassnames;
+module.exports = BabelPluginInlineClassnames;

@@ -31,109 +31,82 @@ exports[`executes string-literal-mixed.js 1`] = `"global FOO BAR"`;
 exports[`executes string-literals-only.js 1`] = `"foo bar ham"`;
 
 exports[`transforms basic.js 1`] = `
-"
-import styles from './styles.css';
-
-(styles.foo || '') + ' ' + (styles.bar || '');"
+"import styles from './styles.css';
+(styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");"
 `;
 
 exports[`transforms bind.js 1`] = `
-"
-import styles from './styles.css';
-
-(styles.foo || '') + ' ' + (styles.bar || '');"
+"import styles from './styles.css';
+(styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");"
 `;
 
 exports[`transforms bind-example.js 1`] = `
-"
-
-const inline = {
-	foo: 'abc',
-	bar: 'def',
-	baz: 'xyz'
+"const inline = {
+  foo: 'abc',
+  bar: 'def',
+  baz: 'xyz'
 };
-
-(inline.foo || '') + ' ' + ((inline.bar || '') + ' ' + ((1 ? inline.baz : '') || ''));"
+(inline.foo || \\"\\") + \\" \\" + ((inline.bar || \\"\\") + \\" \\" + ((1 ? inline.baz : \\"\\") || \\"\\"));"
 `;
 
 exports[`transforms bind-scoped.js 1`] = `
-"
-import styles from './styles.css';
+"import styles from './styles.css';
 
 function scope1() {
-	function scope2() {
-		return (styles.foo || '') + ' ' + (styles.bar || '');
-	}
+  function scope2() {
+    return (styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");
+  }
 
-	return scope2();
+  return scope2();
 }
 
 scope1();"
 `;
 
 exports[`transforms classnames-examples.js 1`] = `
-"
-
-'foo bar';
-'foo bar';
+"\\"foo bar\\";
+\\"foo bar\\";
 'foo-bar';
-'';
-'foo bar';
-'foo bar';
-'foo bar baz quux';
-'bar ' + 1;"
+\\"\\";
+\\"foo bar\\";
+\\"foo bar\\";
+\\"foo bar baz quux\\";
+\\"bar \\" + 1;"
 `;
 
 exports[`transforms custom-import-name.js 1`] = `
-"
-import styles from './styles.css';
-
-(styles.foo || '') + ' ' + (styles.bar || '');"
+"import styles from './styles.css';
+(styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");"
 `;
 
 exports[`transforms falsy-values-mixed.js 1`] = `
-"
-
-const nullValue = null;
-
-'foo ' + (1 + ' ' + (nullValue || ''));"
+"const nullValue = null;
+\\"foo \\" + (1 + \\" \\" + (nullValue || \\"\\"));"
 `;
 
-exports[`transforms falsy-values-only.js 1`] = `
-"
-
-'';"
-`;
+exports[`transforms falsy-values-only.js 1`] = `"'';"`;
 
 exports[`transforms logical-expression.js 1`] = `
-"
-
-const FALSY = false;
+"const FALSY = false;
 const ANOTHER_FALSY = false;
-
-FALSY && ANOTHER_FALSY && 'foo' || '';"
+FALSY && ANOTHER_FALSY && 'foo' || \\"\\";"
 `;
 
 exports[`transforms logical-expressions.js 1`] = `
-"
-
-const TRUTHY = true;
+"const TRUTHY = true;
 const FALSY = false;
 const nullValue = null;
-
-(TRUTHY && nullValue || '') + ' ' + ((FALSY && 'foo' || '') + ' ' + ((TRUTHY ? nullValue : 'ham') || ''));"
+(TRUTHY && nullValue || \\"\\") + \\" \\" + ((FALSY && 'foo' || \\"\\") + \\" \\" + ((TRUTHY ? nullValue : 'ham') || \\"\\"));"
 `;
 
 exports[`transforms object-expression.js 1`] = `
-"
-import styles from './styles.css';
-
-'foo bar';
+"import styles from './styles.css';
+\\"foo bar\\";
 'foo-bar';
-'foo bar';
-'foo bar';
-'foo ham';
-(styles.foo || '') + ' ' + (styles.bar || '');"
+\\"foo bar\\";
+\\"foo bar\\";
+\\"foo ham\\";
+(styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");"
 `;
 
 exports[`transforms other-classnames.js 1`] = `
@@ -145,29 +118,23 @@ classnames(styles.foo, styles.bar);"
 `;
 
 exports[`transforms scoped.js 1`] = `
-"
+"function scope1() {
+  function scope2() {
+    return \\"foo bar\\";
+  }
 
-function scope1() {
-	function scope2() {
-		return 'foo bar';
-	}
-
-	return scope2();
+  return scope2();
 }
 
 scope1();"
 `;
 
 exports[`transforms string-literal-mixed.js 1`] = `
-"
-import styles from './styles.css';
-
-'global ' + ((styles.foo || '') + ' ' + (styles.bar || ''));"
+"import styles from './styles.css';
+\\"global \\" + ((styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\"));"
 `;
 
 exports[`transforms string-literals-only.js 1`] = `
-"
-import styles from './styles.css';
-
-'foo bar ham';"
+"import styles from './styles.css';
+\\"foo bar ham\\";"
 `;

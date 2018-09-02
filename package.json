@@ -38,11 +38,13 @@
     "test": "jest"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.25.0",
-    "babel-eslint": "^7.2.3",
-    "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-syntax-jsx": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.4.2",
     "classnames": "^2.2.5",
     "eslint": "^5.4.0",
     "eslint-config-prettier": "^3.0.1",
@@ -55,7 +57,7 @@
     "validate-commit-msg": "^2.14.0"
   },
   "peerDependencies": {
-    "babel-core": "6.*"
+    "@babel/core": "7.*"
   },
   "engines": {
     "node": ">=6"

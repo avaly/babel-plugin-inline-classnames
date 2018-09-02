@@ -1,7 +1,7 @@
 /* eslint-env jest */
 /* eslint no-console: 0 */
 
-const babel = require('babel-core');
+const babel = require('@babel/core');
 const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
@@ -24,7 +24,7 @@ fixtures.forEach(fixture => {
 	it(`executes ${test}`, () => {
 		const source = fs.readFileSync(__dirname + '/fixtures/' + test);
 		const { code } = babel.transform(source, {
-			plugins: ['transform-es2015-modules-commonjs', plugin],
+			plugins: ['@babel/plugin-transform-modules-commonjs', plugin],
 		});
 
 		const result = eval(code);
