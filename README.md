@@ -29,7 +29,7 @@ For all environments:
 
 ```json
 {
-  "plugins": ["inline-classnames"]
+  "plugins": ["babel-plugin-inline-classnames"]
 }
 ```
 
@@ -39,7 +39,7 @@ For production only (see [env](http://babeljs.io/docs/usage/babelrc/#env-option)
 {
   "env": {
     "production": {
-      "plugins": ["inline-classnames"]
+      "plugins": ["babel-plugin-inline-classnames"]
     }
   }
 }
@@ -98,3 +98,10 @@ import styles from './styles.css';
 
 (styles.foo || '') + ' ' + (styles.bar || '');
 ```
+
+## Versions
+
+See full [changelog](CHANGELOG.md) for details.
+
+- `1.*` - requires Babel `6.*`
+- `2.*` - requires Babel `7.*`
