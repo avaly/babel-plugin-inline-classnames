@@ -16,6 +16,8 @@ exports[`executes falsy-values-mixed.js 1`] = `"foo 1 "`;
 
 exports[`executes falsy-values-only.js 1`] = `""`;
 
+exports[`executes for-in-declaration-in-initialization.js 1`] = `undefined`;
+
 exports[`executes logical-expression.js 1`] = `""`;
 
 exports[`executes logical-expressions.js 1`] = `"  "`;
@@ -103,6 +105,15 @@ exports[`transforms falsy-values-only.js 1`] = `
 "
 
 '';"
+`;
+
+exports[`transforms for-in-declaration-in-initialization.js 1`] = `
+"import styles from './styles.css';
+const object = {};
+
+for (const key in object) {
+  (styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");
+}"
 `;
 
 exports[`transforms logical-expression.js 1`] = `
