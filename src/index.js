@@ -233,6 +233,7 @@ const BabelPluginInlineClassnames = ({ types: t }) => {
 				.filter(
 					declaration =>
 						declaration.type === 'VariableDeclarator' &&
+						declaration.init &&
 						declaration.init.type === 'CallExpression',
 				)
 				.some(declaration => {
