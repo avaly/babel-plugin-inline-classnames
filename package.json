@@ -33,6 +33,7 @@
     "commitmsg": "validate-commit-msg",
     "lint": "eslint .",
     "precommit": "lint-staged",
+    "prepublish": "yarn build",
     "pretty": "prettier --use-tabs --single-quote --trailing-comma all --write \"**/*.js\"",
     "release": "standard-version",
     "test": "jest"
