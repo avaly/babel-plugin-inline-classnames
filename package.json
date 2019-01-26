@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-inline-classnames",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Babel plugin which inlines the result of classnames",
   "keywords": [
     "babel-plugin",
