@@ -108,11 +108,13 @@ exports[`transforms falsy-values-only.js 1`] = `
 `;
 
 exports[`transforms for-in-declaration-in-initialization.js 1`] = `
-"import styles from './styles.css';
+"
+import styles from './styles.css';
+
 const object = {};
 
 for (const key in object) {
-  (styles.foo || \\"\\") + \\" \\" + (styles.bar || \\"\\");
+	(styles.foo || '') + ' ' + (styles.bar || '');
 }"
 `;
 
