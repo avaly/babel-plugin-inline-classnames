@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/avaly/babel-plugin-inline-classnames/compare/v2.0.0...v2.0.1) (2019-01-26)
+
+
+### Bug Fixes
+
+* Guard before accessing VariableDeclarator init ([#4](https://github.com/avaly/babel-plugin-inline-classnames/issues/4)) :bug: ([92d6bc8](https://github.com/avaly/babel-plugin-inline-classnames/commit/92d6bc8))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/avaly/babel-plugin-inline-classnames/compare/v1.2.0...v2.0.0) (2018-09-02)
 
